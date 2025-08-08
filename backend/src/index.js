@@ -1,8 +1,15 @@
 import express from 'express';
 import { PORT } from './config/configServer.js';
 import { StatusCodes } from 'http-status-codes';
+import connectDb from './config/dbConfig.js';
+import apiRouter from './routes/apiRoutes.js';
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api",apiRouter);
 
 app.get('/ping', (req, res) => {
   res.status(StatusCodes.OK).json({
@@ -12,4 +19,5 @@ app.get('/ping', (req, res) => {
 
 app.listen(PORT, () => {
   console.log('app is listening on the port ' + PORT);
+  connectDb();
 });
