@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema(
       unique: [true, 'Email already exists'],
       lowercase: true,
       match: [
+        // eslint-disable-next-line no-useless-escape
         /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
         'Please provide a valid email address'
       ]
