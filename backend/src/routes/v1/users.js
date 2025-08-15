@@ -1,9 +1,10 @@
 import express from 'express';
+import { signUp } from '../../controllers/userController.js';
+import { validate } from '../../validators/zodValidator.js';
+import { userSignUpSchema } from '../../validators/userSchema.js';
 
-const userRouter = express.Router();
+const router = express.Router();
 
-userRouter.use('/' , (req,res) =>{
-  res.status(201).send("ok from user router")
-});
+router.post('/signup', validate(userSignUpSchema), signUp);
 
-export default userRouter;
+export default router;
